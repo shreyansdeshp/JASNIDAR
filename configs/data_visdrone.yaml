@@ -1,0 +1,6 @@
+# visdrone, converted to one class (person). Paths are relative to 'path'.
+path: datasets/visdrone
+train: images/train
+val: images/val
+names:
+  0: person

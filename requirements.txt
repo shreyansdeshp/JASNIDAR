@@ -1,0 +1,8 @@
+# Pin the exact version once you know it: run `pip show ultralytics`
+# and replace the line below with ultralytics==<version>
+ultralytics
+sahi
+opencv-python
+numpy
+pyyaml
+kaggle

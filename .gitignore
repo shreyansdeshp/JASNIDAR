@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Training output and weights
+runs/
+*.pt
+*.engine
+*.onnx
+*.pth
+
+# Datasets (too large, licences vary)
+datasets/
+
+# Video
+*.mp4
+*.MP4
+*.avi
+*.mov
+
+# Secrets and local config
+config.yaml
+.env
+kaggle.json
+
+# OS and editor
+.DS_Store
+.vscode/

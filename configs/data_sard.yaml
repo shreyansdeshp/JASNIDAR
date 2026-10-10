@@ -1,0 +1,6 @@
+# sard, converted to one class (person). Paths are relative to 'path'.
+path: datasets/sard
+train: images/train
+val: images/val
+names:
+  0: person

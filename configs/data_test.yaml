@@ -1,0 +1,7 @@
+# Fixed test set. Never trained on. Same for every stage.
+path: datasets/test
+train: images
+val: images
+test: images
+names:
+  0: person
