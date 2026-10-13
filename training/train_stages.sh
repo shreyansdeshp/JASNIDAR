@@ -6,10 +6,10 @@ set -e
 IMGSZ=640
 
 # Smoke test first: 3 epochs, to check paths and labels
-# yolo train model=yolo11s.pt data=configs/data_visdrone.yaml imgsz=$IMGSZ epochs=3 batch=8 name=smoke
+# yolo train model=yolo11s.pt data=configs/data_visdrone_tiled.yaml imgsz=$IMGSZ epochs=3 batch=8 name=smoke
 
 # Stage 1: VisDrone, from COCO-pretrained weights
-yolo train model=yolo11s.pt data=configs/data_visdrone.yaml imgsz=$IMGSZ epochs=50 batch=16 name=s1_visdrone
+yolo train model=yolo11s.pt data=configs/data_visdrone_tiled.yaml imgsz=$IMGSZ epochs=50 batch=16 name=s1_visdrone
 yolo val model=runs/detect/s1_visdrone/weights/best.pt data=configs/data_test.yaml imgsz=$IMGSZ name=s1_visdrone_test
 
 # Stage 2: HERIDAL tiles, from stage 1

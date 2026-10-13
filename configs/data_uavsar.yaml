@@ -1,0 +1,8 @@
+# UAV-SAR-Human-Detection test set (300 frames, DJI Air 3S), polygons converted to boxes.
+# Evaluation only: there is no train split. Paths are relative to 'path'.
+path: datasets/uavsar_test
+train: images/test
+val: images/test
+test: images/test
+names:
+  0: person

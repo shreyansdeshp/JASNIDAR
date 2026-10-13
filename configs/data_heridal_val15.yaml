@@ -1,0 +1,6 @@
+# heridal (15% val), converted to one class (person). Paths are relative to 'path'.
+path: datasets/heridal_val15
+train: images/train
+val: images/val
+names:
+  0: person

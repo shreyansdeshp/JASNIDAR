@@ -49,7 +49,7 @@ See `training/train_stages.sh`. Stages: VisDrone, then HERIDAL, then SARD, then 
 
 - [Ultralytics YOLO11](https://github.com/ultralytics/ultralytics) (AGPL-3.0)
 - [VisDrone](https://github.com/VisDrone/VisDrone-Dataset), Tianjin University
-- [HERIDAL](https://zenodo.org/records/5662351), University of Split
+- HERIDAL, University of Split (we use the [Roboflow re-export](https://universe.roboflow.com/new-workspace-qsuag/heridal-t428z); original: https://zenodo.org/records/5662351)
 - SARD (Search and Rescue dataset, Kaggle)
 - [AlienSight](https://github.com/7amzaGH/UAV-SAR-Human-Detection-and-Geolocation) (MIT), reference for the geolocation approach
 
