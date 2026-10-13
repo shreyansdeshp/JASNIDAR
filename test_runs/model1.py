@@ -1,6 +1,6 @@
 """model1: the full run. Score the COCO baseline, then for each stage train it and score it.
 
-    baseline (yolo11s.pt) -> s1 VisDrone -> s2 HERIDAL -> s3 SARD -> (s4 own footage)
+    baseline (yolo11s.pt) -> s1 VisDrone -> s2 HERIDAL   (s3 SARD and s4 own footage are opt-in)
 
 Every score is on the fixed test set (datasets/uavsar_test), with SAHI sliced inference
 and, as a baseline, plain whole-frame inference. Results go to test_runs/model1/.
@@ -9,7 +9,7 @@ Setup (run once, in your environment):
     pip install ultralytics sahi
 
 Usage (from the repo root):
-    python test_runs/model1.py                          # baseline, then every stage
+    python test_runs/model1.py                          # baseline, then the default stages (s1, s2)
     python test_runs/model1.py --stages s1 s2           # only some stages
     python test_runs/model1.py --skip-train             # only score weights that already exist
     python test_runs/model1.py --skip-baseline --no-plain
@@ -57,7 +57,7 @@ def write_report(results):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--stages", nargs="+", choices=list(train_stages.STAGES),
-                    help="default: all stages with an existing config")
+                    help=f"default: {' '.join(train_stages.DEFAULT_STAGES)}")
     ap.add_argument("--epochs", type=int, help="override epochs for every stage")
     ap.add_argument("--batch", type=int)
     ap.add_argument("--device", help="e.g. 0 or cpu for training, cuda:0 or cpu for scoring")
@@ -66,7 +66,7 @@ def main():
     ap.add_argument("--no-plain", action="store_true", help="skip the plain whole-frame score")
     a = ap.parse_args()
 
-    stages = a.stages or [k for k, v in train_stages.STAGES.items() if (ROOT / v[1]).exists()]
+    stages = a.stages or train_stages.DEFAULT_STAGES
     modes = ["sahi"] if a.no_plain else ["sahi", "plain"]
     results = []
 

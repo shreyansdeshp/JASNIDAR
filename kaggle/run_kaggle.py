@@ -33,7 +33,7 @@ DATA_INPUTS = {
     "uavsar_test": "/kaggle/input/CHANGE-ME-uavsar-test",
 }
 
-STAGES = ["s1", "s2", "s3"]      # s4 needs your own footage and configs/data_own.yaml
+STAGES = ["s1", "s2"]            # SARD (s3) is set aside; add "s3" to use it. s4 needs your own footage
 EPOCHS = {"s1": 20, "s2": 50, "s3": 50}   # per stage; stage 1 is only pre-training
 BATCH = 16                       # T4/P100 have 16 GB; lower it if you see out-of-memory errors
 DEVICE = "0"                     # training GPU; scoring uses "cuda:0" below

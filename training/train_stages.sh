@@ -13,7 +13,7 @@ yolo train model=yolo11s.pt data=configs/data_visdrone_tiled.yaml imgsz=$IMGSZ e
 yolo val model=runs/detect/s1_visdrone/weights/best.pt data=configs/data_test.yaml imgsz=$IMGSZ name=s1_visdrone_test
 
 # Stage 2: HERIDAL tiles, from stage 1
-yolo train model=runs/detect/s1_visdrone/weights/best.pt data=configs/data_heridal.yaml imgsz=$IMGSZ epochs=50 lr0=0.002 name=s2_heridal
+yolo train model=runs/detect/s1_visdrone/weights/best.pt data=configs/data_heridal_val15.yaml imgsz=$IMGSZ epochs=50 optimizer=SGD lr0=0.002 name=s2_heridal
 yolo val model=runs/detect/s2_heridal/weights/best.pt data=configs/data_test.yaml imgsz=$IMGSZ name=s2_heridal_test
 
 # Stage 3 (set aside for now): SARD, from stage 2

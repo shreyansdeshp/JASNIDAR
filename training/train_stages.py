@@ -6,7 +6,7 @@ Setup (run once, in your environment):
     pip install ultralytics sahi
 
 Usage (from the repo root):
-    python training/train_stages.py                      # every stage whose config exists
+    python training/train_stages.py                      # the default stages (s1, s2)
     python training/train_stages.py --stages s1 s2       # only some stages
     python training/train_stages.py --stages s2 --init runs/detect/s1_visdrone/weights/best.pt
     python training/train_stages.py --smoke              # 3 epochs on stage 1, to check paths and labels
@@ -29,6 +29,8 @@ STAGES = {
     "s4": ("s4_own", "configs/data_own.yaml", 50, 16, 0.001),
 }
 PREVIOUS = {"s2": "s1", "s3": "s2", "s4": "s3"}
+# Run by default. SARD (s3) is set aside for now: add it with --stages s1 s2 s3, or edit this list.
+DEFAULT_STAGES = ["s1", "s2"]
 BASE_WEIGHTS = "yolo11s.pt"  # COCO-pretrained, downloaded by Ultralytics on first use
 
 
@@ -88,7 +90,7 @@ def train_stage(key: str, imgsz: int = 640, epochs: int | None = None, batch: in
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--stages", nargs="+", choices=list(STAGES), help="default: all stages with an existing config")
+    ap.add_argument("--stages", nargs="+", choices=list(STAGES), help=f"default: {' '.join(DEFAULT_STAGES)}")
     ap.add_argument("--imgsz", type=int, default=640)
     ap.add_argument("--epochs", type=int, help="override epochs for every chosen stage")
     ap.add_argument("--batch", type=int)
@@ -99,7 +101,7 @@ def main():
 
     if a.smoke:
         a.stages, a.epochs, a.batch = ["s1"], 3, 8
-    stages = a.stages or [k for k, v in STAGES.items() if (ROOT / v[1]).exists()]
+    stages = a.stages or DEFAULT_STAGES
     for i, key in enumerate(stages):
         train_stage(key, a.imgsz, a.epochs, a.batch, a.init if i == 0 else None, a.device)
 
