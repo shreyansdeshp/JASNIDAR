@@ -30,7 +30,7 @@ STAGES = {
 }
 PREVIOUS = {"s2": "s1", "s3": "s2", "s4": "s3"}
 # Run by default. SARD (s3) is set aside for now: add it with --stages s1 s2 s3, or edit this list.
-DEFAULT_STAGES = ["s1", "s2"]
+DEFAULT_STAGES = ["s1", "s2","s3"]
 BASE_WEIGHTS = "yolo11s.pt"  # COCO-pretrained, downloaded by Ultralytics on first use
 
 
@@ -73,7 +73,7 @@ def train_stage(key: str, imgsz: int = 640, epochs: int | None = None, batch: in
             init = prev
 
     args = dict(data=str(absolute_data_yaml(ROOT / data, name)), imgsz=imgsz, epochs=epochs or def_epochs, batch=batch or def_batch,
-                project=str(PROJECT), name=name)
+                workers=0, project=str(PROJECT), name=name)
     if lr0 is not None:
         # with the default optimizer="auto", Ultralytics ignores lr0 and picks its own rate
         args["lr0"], args["optimizer"] = lr0, "SGD"
